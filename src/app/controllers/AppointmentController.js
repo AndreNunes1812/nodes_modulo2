@@ -1,3 +1,4 @@
+const moment = require('moment')
 const { User, Appointment } = require('../models')
 
 class AppointmentController {
@@ -10,6 +11,12 @@ class AppointmentController {
     const { id } = req.session.user
     const { provider } = req.params
     const { date } = req.body
+
+    console.log(
+      'DATE:',
+      date,
+      moment.tz(date, 'America/Manaus').format('DD/MM/YYYY kk:mm')
+    )
 
     await Appointment.create({
       user_id: id,
